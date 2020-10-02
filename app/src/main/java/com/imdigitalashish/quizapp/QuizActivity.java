@@ -24,13 +24,11 @@ import java.util.Locale;
 public class QuizActivity extends AppCompatActivity {
     public static final String EXTRA_SCORE = "extraScore";
     private static final long COUNTDOWN_IN_MILLIS = 30000;
-
     private static final String KEY_SCORE = "keyScore";
     private static final String KEY_QUESTION_COUNT = "keyQuestionCount";
     private static final String KEY_MILLIS_LEFT = "keyMillisLeft";
     private static final String KEY_ANSWERED = "keyAnswered";
     private static final String KEY_QUESTION_LIST = "keyQuestionList";
-
     private TextView textViewQuestion;
     private TextView textViewScore;
     private TextView textViewQuestionCount;
@@ -44,9 +42,7 @@ public class QuizActivity extends AppCompatActivity {
     private ColorStateList textColorDefaultCd;
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
-//    private List<Question> questionList;
-    private ArrayList<Question> questionList; // this is for parceable on savedInstance;
-
+    private ArrayList<Question> questionList;
     private int questionCounter;
     private int questionCountTotal;
     private Question currentQuestion;
@@ -68,10 +64,7 @@ public class QuizActivity extends AppCompatActivity {
         buttonConfirmNext = findViewById(R.id.button_confirm_next);
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCd = textViewCountDown.getTextColors();
-
-
         if (savedInstanceState == null) {
-
             QuizDbHelper dbHelper = new QuizDbHelper(this);
             questionList = dbHelper.getAllQuestions();
             questionCountTotal = questionList.size();
@@ -79,7 +72,6 @@ public class QuizActivity extends AppCompatActivity {
             showNextQuestion();
         } else {
             questionList = savedInstanceState.getParcelableArrayList(KEY_QUESTION_LIST);
-
             questionCountTotal = questionList.size();
             questionCounter = savedInstanceState.getInt(KEY_QUESTION_COUNT);
             currentQuestion = questionList.get(questionCounter - 1);
@@ -212,11 +204,9 @@ public class QuizActivity extends AppCompatActivity {
             countDownTimer.cancel();
         }
     }
-
-
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
         outState.putInt(KEY_SCORE, score);
         outState.putInt(KEY_QUESTION_COUNT, questionCounter);
         outState.putLong(KEY_MILLIS_LEFT, timeLeftInMillis);
