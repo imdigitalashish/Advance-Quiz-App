@@ -13,7 +13,6 @@ import android.widget.TextView;
 public class StartingScreenActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_QUIZ = 1;
-
     public static final String SHARED_PREFS = "sharedPrefs";
 
     public static final String KEY_HIGHSCORE = "keyHighScore";
